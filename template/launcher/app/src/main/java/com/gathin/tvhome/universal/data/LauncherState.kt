@@ -9,5 +9,25 @@ import androidx.compose.runtime.setValue
 object LauncherState {
     var lastInput by mutableLongStateOf(System.currentTimeMillis())
     var screensaver by mutableStateOf(false)
-    var visible by mutableStateOf(true)
+    /** False until an activity attaches; the UI unloads while another app is in front. */
+    var visible by mutableStateOf(false)
+        private set
+
+    private var owner: Any? = null
+
+    /**
+     * The activity that currently owns the screen. A stale instance (for example after an APK update
+     * replaced the running activity) must not be able to hide the new one in its late onStop().
+     */
+    fun attach(token: Any) {
+        owner = token
+        visible = true
+    }
+
+    fun detach(token: Any) {
+        if (owner === token) {
+            owner = null
+            visible = false
+        }
+    }
 }

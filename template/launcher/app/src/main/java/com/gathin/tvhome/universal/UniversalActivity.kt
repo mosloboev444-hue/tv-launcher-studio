@@ -18,7 +18,13 @@ class UniversalActivity : ComponentActivity() {
     override fun onStart() {
         super.onStart()
         LauncherState.screensaver = false
-        LauncherState.visible = true
+        LauncherState.attach(this)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Re-assert ownership: a replaced instance may deliver its onStop() after this one resumed.
+        LauncherState.attach(this)
     }
 
     /**
@@ -27,7 +33,7 @@ class UniversalActivity : ComponentActivity() {
      */
     override fun onStop() {
         super.onStop()
-        LauncherState.visible = false
+        LauncherState.detach(this)
         WallpaperCache.clear()
     }
 
