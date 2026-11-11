@@ -14,3 +14,4 @@ signing/
 template/launcher/local.properties
 template/launcher/.kotlin/
 LauncherStudio-win64.zip
+dist-public/
