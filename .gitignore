@@ -1,0 +1,12 @@
+# local data: projects, build caches, downloaded tools and the signing key stay on the user's computer
+projects/
+build/
+build_pyi/
+dist/
+tools/
+edited/
+edited-test/
+__pycache__/
+*.spec
+settings.json
+signing/
