@@ -10,3 +10,6 @@ __pycache__/
 *.spec
 settings.json
 signing/
+
+template/launcher/local.properties
+template/launcher/.kotlin/
