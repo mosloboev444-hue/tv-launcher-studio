@@ -46,9 +46,6 @@ object DeepSeek {
             val text = runCatching { File(dir, KEY_FILE).readText() }.getOrNull()?.trim()
             if (!text.isNullOrEmpty()) return text
         }
-        // Launcher Studio can optionally bake the key into the APK (the builder warns about it).
-        val embedded = com.gathin.tvhome.StudioDefaults.string(context, "deepseekKey")
-        if (!embedded.isNullOrEmpty()) return embedded
         return null
     }
 

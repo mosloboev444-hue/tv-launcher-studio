@@ -138,6 +138,22 @@
             android:theme="@style/Theme.TvLauncher" />
 
         <activity
+            android:name=".polly.PollyActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|uiMode|density|fontScale|locale|layoutDirection"
+            android:theme="@style/Theme.TvLauncher" />
+
+        <activity
+            android:name=".wintv.WinTvActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|uiMode|density|fontScale|locale|layoutDirection"
+            android:theme="@style/Theme.TvLauncher" />
+
+        <activity
             android:name=".LauncherSettingsActivity"
             android:exported="false"
             android:excludeFromRecents="true"

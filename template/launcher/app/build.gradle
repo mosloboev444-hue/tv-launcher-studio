@@ -16,8 +16,8 @@ android {
         applicationId providers.gradleProperty('launcherApplicationId').getOrElse('com.gathin.tvhome')
         minSdk 26
         targetSdk 34
-        versionCode 25
-        versionName '4.1.6'
+        versionCode 27
+        versionName '4.2.0'
     }
 
     buildTypes {
@@ -67,6 +67,8 @@ dependencies {
     implementation 'androidx.compose.animation:animation'
     implementation 'androidx.compose.material:material-icons-extended'
     implementation 'androidx.tv:tv-material:1.0.0'
+    // PollyTV's settings use Material 3 toggles/sliders on the same Compose BOM.
+    implementation 'androidx.compose.material3:material3'
     implementation 'androidx.profileinstaller:profileinstaller:1.3.1'
     // Test only (never in the APK): plain JVM tests for the module card validators, src/test.
     // AmneziaWG backend's nullness annotations (compile only, not packaged).

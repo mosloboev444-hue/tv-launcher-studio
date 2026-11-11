@@ -470,11 +470,12 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
         super.onCreate(savedInstanceState);
         // Third Home screen: the universal Compose launcher (any Android TV or box). It lives in its own
         // activity, so this one hands over before inflating anything of the cinema/classic screens.
-        if (ScreenProfile.isUniversal(this)) {
+        Class<?> routedScreen = handledScreenActivity(ScreenProfile.current(this));
+        if (routedScreen != null) {
             // Nothing below ran, so every cleanup in onPause/onStop/onDestroy would touch fields that were never
             // created: mark the short route and skip the normal lifecycle work.
             routedAway = true;
-            startActivity(new Intent(this, com.gathin.tvhome.universal.UniversalActivity.class));
+            startActivity(new Intent(this, routedScreen));
             finish();
             return;
         }
@@ -2887,16 +2888,27 @@ public class MainActivity extends Activity implements AppAdapter.TileListener {
     private int screenProfileName(String screen) {
         if (ScreenProfile.CLASSIC.equals(screen)) return R.string.screen_profile_classic;
         if (ScreenProfile.UNIVERSAL.equals(screen)) return R.string.screen_profile_universal;
+        if (ScreenProfile.POLLY.equals(screen)) return R.string.screen_profile_polly;
+        if (ScreenProfile.WINTV.equals(screen)) return R.string.screen_profile_wintv;
         return R.string.screen_profile_cinema;
     }
 
-    /** Cycles Кино → Классика → Универсальный; the universal one opens its own (Compose) activity. */
+    /** The new Home screens live in their own activities; returns null for the cinema/classic ones. */
+    private Class<?> handledScreenActivity(String screen) {
+        if (ScreenProfile.UNIVERSAL.equals(screen)) return com.gathin.tvhome.universal.UniversalActivity.class;
+        if (ScreenProfile.POLLY.equals(screen)) return com.gathin.tvhome.polly.PollyActivity.class;
+        if (ScreenProfile.WINTV.equals(screen)) return com.gathin.tvhome.wintv.WinTvActivity.class;
+        return null;
+    }
+
+    /** Cycles Кино → Классика → Универсальный → PollyTV → WinTV. */
     private void switchScreenProfile() {
         String next = ScreenProfile.next(this);
         ScreenProfile.setScreen(this, next);
         Toast.makeText(this, getString(screenProfileName(next)), Toast.LENGTH_SHORT).show();
-        if (ScreenProfile.UNIVERSAL.equals(next)) {
-            startActivity(new Intent(this, com.gathin.tvhome.universal.UniversalActivity.class));
+        Class<?> handled = handledScreenActivity(next);
+        if (handled != null) {
+            startActivity(new Intent(this, handled));
             finish();
         } else {
             recreate();

@@ -36,10 +36,13 @@ public final class ScreenBridge {
         activity.finish();
     }
 
+    /** Moves to the next Home screen; used by the screen-switch button on the PollyTV/WinTV screens. */
+    public static void cycle(Activity activity) {
+        switchTo(activity, ScreenProfile.next(activity));
+    }
+
     /** The apps configured for the dock, offered as the first "Favorites" list on the universal screen. */
     public static String[] defaultFavorites(Context context) {
-        String[] preset = StudioDefaults.stringArray(context, "favorites");
-        if (preset != null && preset.length > 0) return preset;
         try {
             Config config = Config.load(context);
             List<String> dock = config.dockApps;
@@ -51,8 +54,6 @@ public final class ScreenBridge {
 
     /** The VPN app configured for CleanYourTV's VPN pill, used as the universal screen's default VPN. */
     public static String defaultVpn(Context context) {
-        String preset = StudioDefaults.string(context, "defaultVpn");
-        if (preset != null) return preset;
         try {
             Config config = Config.load(context);
             String vpn = config.vpnApp;

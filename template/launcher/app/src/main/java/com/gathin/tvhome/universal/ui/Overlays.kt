@@ -246,7 +246,18 @@ fun ScreenPickerDialog(current: String, onDismiss: () -> Unit) {
         MenuButton(
             text = stringResource(R.string.uni_screen_universal),
             value = if (current == "universal") tick else null,
-        ) { onDismiss() }
+        ) {
+            if (current == "universal") onDismiss()
+            else if (activity != null) ScreenBridge.switchTo(activity, "universal") else onDismiss()
+        }
+        MenuButton(
+            text = stringResource(R.string.uni_screen_polly),
+            value = if (current == "polly") tick else null,
+        ) { if (activity != null) ScreenBridge.switchTo(activity, "polly") else onDismiss() }
+        MenuButton(
+            text = stringResource(R.string.uni_screen_wintv),
+            value = if (current == "wintv") tick else null,
+        ) { if (activity != null) ScreenBridge.switchTo(activity, "wintv") else onDismiss() }
         MenuButton(stringResource(R.string.uni_close)) { onDismiss() }
     }
 }

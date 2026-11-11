@@ -1,7 +1,5 @@
 package com.gathin.tvhome.vpn;
 
-import com.gathin.tvhome.StudioDefaults;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -93,10 +91,6 @@ public final class VpnProfiles {
 
     /** "builtin" or the package name of the VPN app the user picked. */
     public static String source(Context context) {
-        if (!prefs(context).contains(KEY_SOURCE)) {
-            String preset = StudioDefaults.string(context, "vpnSource");
-            if (preset != null) return preset;
-        }
         String value = prefs(context).getString(KEY_SOURCE, SOURCE_BUILTIN);
         return value == null || value.trim().isEmpty() ? SOURCE_BUILTIN : value;
     }

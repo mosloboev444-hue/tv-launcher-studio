@@ -29,23 +29,21 @@ final class ScreenProfile {
     static final String CLASSIC = "classic";
     /** The third Home screen: the universal Compose launcher (works on any Android TV or box). */
     static final String UNIVERSAL = "universal";
+    /** Fourth Home screen: the dark atmospheric PollyTV dock. */
+    static final String POLLY = "polly";
+    /** Fifth Home screen: the Windows-styled WinTV launcher. */
+    static final String WINTV = "wintv";
 
     private ScreenProfile() {
     }
 
     /** The chosen screen; unknown values fall back to the cinema one. */
     static String current(Context ctx) {
-        SharedPreferences p = prefs(ctx);
-        // Launcher Studio can pre-select the default screen; a choice made on the TV always wins.
-        if (!p.contains(KEY)) {
-            String preset = StudioDefaults.string(ctx, "defaultScreen");
-            if (UNIVERSAL.equals(preset)) return UNIVERSAL;
-            if (CLASSIC.equals(preset)) return CLASSIC;
-            if (CINEMA.equals(preset)) return CINEMA;
-        }
-        String value = p.getString(KEY, CINEMA);
+        String value = prefs(ctx).getString(KEY, CINEMA);
         if (CLASSIC.equals(value)) return CLASSIC;
         if (UNIVERSAL.equals(value)) return UNIVERSAL;
+        if (POLLY.equals(value)) return POLLY;
+        if (WINTV.equals(value)) return WINTV;
         return CINEMA;
     }
 
@@ -62,9 +60,22 @@ final class ScreenProfile {
         return UNIVERSAL.equals(current(ctx));
     }
 
+    static boolean isPolly(Context ctx) {
+        return POLLY.equals(current(ctx));
+    }
+
+    static boolean isWinTv(Context ctx) {
+        return WINTV.equals(current(ctx));
+    }
+
     /** Stores the screen choice; the caller restarts or recreates Home itself. */
     static void setScreen(Context ctx, String screen) {
-        String value = CLASSIC.equals(screen) ? CLASSIC : UNIVERSAL.equals(screen) ? UNIVERSAL : CINEMA;
+        String value;
+        if (CLASSIC.equals(screen)) value = CLASSIC;
+        else if (UNIVERSAL.equals(screen)) value = UNIVERSAL;
+        else if (POLLY.equals(screen)) value = POLLY;
+        else if (WINTV.equals(screen)) value = WINTV;
+        else value = CINEMA;
         prefs(ctx).edit().putString(KEY, value).apply();
     }
 
@@ -79,11 +90,13 @@ final class ScreenProfile {
         return cinema;
     }
 
-    /** Next screen in the menu's cycle: Кино → Классика → Универсальный → Кино. */
+    /** Next screen in the menu's cycle: Кино → Классика → Универсальный → PollyTV → WinTV → Кино. */
     static String next(Context ctx) {
         switch (current(ctx)) {
             case CLASSIC: return UNIVERSAL;
-            case UNIVERSAL: return CINEMA;
+            case UNIVERSAL: return POLLY;
+            case POLLY: return WINTV;
+            case WINTV: return CINEMA;
             default: return CLASSIC;
         }
     }

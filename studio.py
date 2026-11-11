@@ -16,7 +16,8 @@ import builder
 import editor
 import presets
 
-SCREENS = [("Универсальный", "universal"), ("Кино", "cinema"), ("Классика", "classic")]
+SCREENS = [("Универсальный", "universal"), ("Кино", "cinema"), ("Классика", "classic"),
+           ("PollyTV", "polly"), ("WinTV", "wintv")]
 SOUNDS = ["Колокольчики", "Мягкие", "Кристалл"]
 VOLUMES = ["Выкл", "Тихо", "Средне", "Громко"]
 SAVERS = [(0, "Выкл"), (2, "2 минуты"), (5, "5 минут"), (10, "10 минут")]

@@ -162,6 +162,8 @@
     <string name="screen_profile_cinema">Screen: Cinema</string>
     <string name="screen_profile_universal">Screen: Universal</string>
     <string name="screen_profile_classic">Screen: Classic</string>
+    <string name="screen_profile_polly">Screen: PollyTV</string>
+    <string name="screen_profile_wintv">Screen: WinTV</string>
     <!-- The name badge above the focused app on the cinema screen (hold OK on Settings to switch). -->
     <string name="chip_style_title">Name style</string>
     <string name="chip_style_glass">Glass</string>
@@ -217,4 +219,6 @@
     <string name="uni_screen_cinema">Cinema</string>
     <string name="uni_screen_classic">Classic</string>
     <string name="uni_screen_universal">Universal</string>
+    <string name="uni_screen_polly">PollyTV</string>
+    <string name="uni_screen_wintv">WinTV</string>
 </resources>

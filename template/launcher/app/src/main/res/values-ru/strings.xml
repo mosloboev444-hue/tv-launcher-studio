@@ -158,6 +158,8 @@
     <string name="screen_profile_cinema">Экран: Кино</string>
     <string name="screen_profile_universal">Экран: Универсальный</string>
     <string name="screen_profile_classic">Экран: Классика</string>
+    <string name="screen_profile_polly">Экран: PollyTV</string>
+    <string name="screen_profile_wintv">Экран: WinTV</string>
     <!-- The name badge above the focused app on the cinema screen (hold OK on Settings to switch). -->
     <string name="chip_style_title">Плашка</string>
     <string name="chip_style_glass">Стекло</string>
@@ -213,4 +215,6 @@
     <string name="uni_screen_cinema">Кино</string>
     <string name="uni_screen_classic">Классика</string>
     <string name="uni_screen_universal">Универсальный</string>
+    <string name="uni_screen_polly">PollyTV</string>
+    <string name="uni_screen_wintv">WinTV</string>
 </resources>

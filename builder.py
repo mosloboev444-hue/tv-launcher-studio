@@ -161,7 +161,7 @@ def validate(project: dict) -> list[str]:
         errors.append("versionCode должен быть числом")
     if not (project.get("version_name") or "").strip():
         errors.append("versionName пустой")
-    if project.get("default_screen") not in ("cinema", "classic", "universal"):
+    if project.get("default_screen") not in ("cinema", "classic", "universal", "polly", "wintv"):
         errors.append("Неизвестный экран по умолчанию")
     wallpaper = project.get("wallpaper") or ""
     if wallpaper:

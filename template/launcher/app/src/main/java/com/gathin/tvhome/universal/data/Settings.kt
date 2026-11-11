@@ -16,15 +16,11 @@ private const val PREFS = "launcher"
 fun loadSettings(context: Context): LauncherSettings {
     val p = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
     val d = LauncherSettings()
-    // Values baked in by Launcher Studio apply only until the user changes them on the TV.
-    fun value(key: String, fallback: Int) =
-        if (p.contains(key)) p.getInt(key, fallback)
-        else com.gathin.tvhome.StudioDefaults.integer(context, key, fallback)
     return LauncherSettings(
-        wallpaper = value("wallpaper", d.wallpaper),
-        soundTheme = value("soundTheme", d.soundTheme),
-        volume = value("volume", d.volume),
-        screensaverMinutes = value("screensaverMinutes", d.screensaverMinutes),
+        wallpaper = p.getInt("wallpaper", d.wallpaper),
+        soundTheme = p.getInt("soundTheme", d.soundTheme),
+        volume = p.getInt("volume", d.volume),
+        screensaverMinutes = p.getInt("screensaverMinutes", d.screensaverMinutes),
     )
 }
 

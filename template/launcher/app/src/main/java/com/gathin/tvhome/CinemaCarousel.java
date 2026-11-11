@@ -93,11 +93,8 @@ final class CinemaCarousel extends FrameLayout {
     private static final String CHIP_STYLE_KEY = "cinema_chip_style";
 
     static int chipStyle(Context context) {
-        android.content.SharedPreferences prefs =
-                context.getSharedPreferences(Config.SETTINGS_NAME, Context.MODE_PRIVATE);
-        int style = prefs.contains(CHIP_STYLE_KEY)
-                ? prefs.getInt(CHIP_STYLE_KEY, CHIP_GLASS)
-                : StudioDefaults.integer(context, "chipStyle", CHIP_GLASS);
+        int style = context.getSharedPreferences(Config.SETTINGS_NAME, Context.MODE_PRIVATE)
+                .getInt(CHIP_STYLE_KEY, CHIP_GLASS);
         return style >= 0 && style < CHIP_STYLES ? style : CHIP_GLASS;
     }
 

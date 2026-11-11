@@ -263,6 +263,11 @@ private fun LauncherContent() {
             )
         }
         if (showNotifs) NotificationsDialog(notifs) { showNotifs = false }
+        if (showScreens) {
+            ScreenPickerDialog(current = ScreenBridge.current(context)) { showScreens = false }
+        }
+        if (showAssistant) AssistantDialog(apps) { showAssistant = false }
+        if (showKey) DeepSeekKeyDialog { showKey = false }
         if (showVpnMenu) VpnMenuDialog(
             connected = vpnConnected,
             working = vpnWorking,
